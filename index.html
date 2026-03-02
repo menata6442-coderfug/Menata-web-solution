@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Professional Website Design & Development - Modern, fast, secure websites">
+    <meta name="keywords" content="website design, web development, e-commerce, business websites, SEO">
+    <title>Professional Website Design & Development | Menata Web Solutions</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header" id="header">
+        <nav class="container nav">
+            <div class="nav-brand">🌐 Menata <span class="gold">Web</span></div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#message" class="cta">Get Quote</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span><span></span><span></span>
+            </div>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <h1>Professional Website Design <span class="gold">& Development</span></h1>
+            <p>We build modern, fast, and secure websites that drive results</p>
+            <div class="hero-buttons">
+                <a href="#services" class="btn btn-primary">Our Services</a>
+                <a href="#contact" class="btn btn-secondary">Contact Us</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="services">
+        <div class="container">
+            <h2>Our Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="icon">🎨</div>
+                    <h3>Website Design</h3>
+                    <p>Stunning, user-centric designs that captivate your audience</p>
+                </div>
+                <div class="service-card">
+                    <div class="icon">💻</div>
+                    <h3>Website Development</h3>
+                    <p>Robust, scalable web applications built with cutting-edge tech</p>
+                </div>
+                <div class="service-card">
+                    <div class="icon">🛒</div>
+                    <h3>E-commerce Websites</h3>
+                    <p>Complete online stores with secure payment integration</p>
+                </div>
+                <div class="service-card">
+                    <div class="icon">🏢</div>
+                    <h3>Business Websites</h3>
+                    <p>Professional corporate websites that establish credibility</p>
+                </div>
+                <div class="service-card">
+                    <div class="icon">🔧</div>
+                    <h3>Website Maintenance</h3>
+                    <p>Ongoing support to keep your website running smoothly</p>
+                </div>
+                <div class="service-card">
+                    <div class="icon">📈</div>
+                    <h3>SEO Optimization</h3>
+                    <p>Strategic SEO to improve visibility and drive traffic</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <div class="icon">📞</div>
+                    <h4>Phone</h4>
+                    <a href="tel:0995740408">0995740408</a>
+                </div>
+                <div class="contact-card">
+                    <div class="icon">📧</div>
+                    <h4>Email</h4>
+                    <a href="mailto:menata6442@gmail.com">menata6442@gmail.com</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="message" class="message-section">
+        <div class="container">
+            <h2>Send a Message</h2>
+            <form id="contactForm">
+                <input type="text" id="name" placeholder="Full Name *" required>
+                <input type="email" id="email" placeholder="Email *" required>
+                <input type="tel" id="phone" placeholder="Phone">
+                <textarea id="message" placeholder="Message *" rows="5" required></textarea>
+                <div class="captcha">
+                    <label id="captchaQ"></label>
+                    <input type="number" id="captcha" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Send Message</button>
+                <div id="status"></div>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Menata Web Solutions. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
