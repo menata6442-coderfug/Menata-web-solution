@@ -85,7 +85,7 @@
                 <div class="contact-card">
                     <div class="icon">📧</div>
                     <h4>Email</h4>
-                    <a href="mailto:menata6442@gmail.com">menata6442@gmail.com</a>
+                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=menata6442@gmail.com" target="_blank" rel="noreferrer">menata6442@gmail.com</a>
                 </div>
             </div>
         </div>
@@ -94,18 +94,25 @@
     <section id="message" class="message-section">
         <div class="container">
             <h2>Send a Message</h2>
-            <form id="contactForm">
-                <input type="text" id="name" placeholder="Full Name *" required>
-                <input type="email" id="email" placeholder="Email *" required>
-                <input type="tel" id="phone" placeholder="Phone">
-                <textarea id="message" placeholder="Message *" rows="5" required></textarea>
-                <div class="captcha">
-                    <label id="captchaQ"></label>
-                    <input type="number" id="captcha" required>
-                </div>
-                <button type="submit" class="btn btn-primary">Send Message</button>
-                <div id="status"></div>
+            <form id="contactForm" action="https://formsubmit.co/menata6442@gmail.com" method="POST">
+                <input type="hidden" name="_next" value="index.html#message-sent">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_subject" value="New website message">
+                <input type="text" id="name" name="name" placeholder="Full Name *" required>
+                <input type="email" id="email" name="email" placeholder="Email *" required>
+                <input type="tel" id="phone" name="phone" placeholder="Phone">
+                <textarea id="messageText" name="message" placeholder="Message *" rows="5" required></textarea>
+                <button type="submit" class="btn btn-primary" id="submitBtn">Send Message</button>
+                <div id="formStatus" class="form-status" aria-live="polite"></div>
             </form>
+        </div>
+    </section>
+
+    <section id="message-sent" class="message-sent">
+        <div class="container">
+            <h2>Message Sent</h2>
+            <p>Thanks for reaching out. Your message has been sent to menata6442@gmail.com and we will get back to you soon.</p>
+            <a class="btn btn-secondary" href="#home">Back to Home</a>
         </div>
     </section>
 
