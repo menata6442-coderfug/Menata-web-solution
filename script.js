@@ -15,86 +15,68 @@ document.querySelectorAll('.nav-menu a').forEach(link => {
     });
 });
 
-// Simple Captcha
-const captchaQuestions = [
-    { q: 'What is 2 + 3?', a: 5 },
-    { q: 'What is 5 + 7?', a: 12 },
-    { q: 'What is 10 - 4?', a: 6 },
-    { q: 'What is 6 * 2?', a: 12 },
-    { q: 'What is 15 / 3?', a: 5 },
-    { q: 'What is 8 + 9?', a: 17 },
-    { q: 'What is 20 - 5?', a: 15 },
-    { q: 'What is 3 * 4?', a: 12 }
-];
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+    contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
 
-let currentCaptcha = {};
+        const submitBtn = document.getElementById('submitBtn');
+        const formStatus = document.getElementById('formStatus');
+        const defaultButtonText = submitBtn ? submitBtn.textContent : 'Send Message';
 
-function generateCaptcha() {
-    currentCaptcha = captchaQuestions[Math.floor(Math.random() * captchaQuestions.length)];
-    document.getElementById('captchaQ').textContent = currentCaptcha.q;
-    document.getElementById('captcha').value = '';
+        if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.classList.add('is-sending');
+            submitBtn.textContent = 'Sending...';
+        }
+
+        if (formStatus) {
+            formStatus.textContent = 'Sending your message...';
+            formStatus.classList.remove('is-error', 'is-success');
+        }
+
+        const action = contactForm.getAttribute('action');
+        const ajaxAction = action ? action.replace('formsubmit.co/', 'formsubmit.co/ajax/') : action;
+
+        try {
+            const response = await fetch(ajaxAction, {
+                method: 'POST',
+                body: new FormData(contactForm),
+                headers: { 'Accept': 'application/json' }
+            });
+
+            if (!response.ok) {
+                throw new Error('Request failed');
+            }
+
+            const result = await response.json();
+            if (result.success) {
+                if (formStatus) {
+                    formStatus.textContent = 'Message sent successfully.';
+                    formStatus.classList.add('is-success');
+                }
+                contactForm.reset();
+                const messageSent = document.getElementById('message-sent');
+                if (messageSent) {
+                    messageSent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            } else {
+                throw new Error('Submission failed');
+            }
+        } catch (error) {
+            if (formStatus) {
+                formStatus.textContent = 'Sorry, the message could not be sent. Please try again.';
+                formStatus.classList.add('is-error');
+            }
+        } finally {
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('is-sending');
+                submitBtn.textContent = defaultButtonText;
+            }
+        }
+    });
 }
-
-// Generate captcha on page load
-window.addEventListener('load', generateCaptcha);
-
-// Contact Form Submission
-document.getElementById('contactForm').addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    const name = document.getElementById('name').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const phone = document.getElementById('phone').value.trim();
-    const message = document.getElementById('message').value.trim();
-    const captchaInput = parseInt(document.getElementById('captcha').value);
-    const statusDiv = document.getElementById('status');
-
-    // Validate captcha
-    if (captchaInput !== currentCaptcha.a) {
-        statusDiv.textContent = '❌ Captcha answer is incorrect. Please try again.';
-        statusDiv.className = 'error';
-        generateCaptcha();
-        return;
-    }
-
-    // Validate form
-    if (!name || !email || !message) {
-        statusDiv.textContent = '❌ Please fill in all required fields.';
-        statusDiv.className = 'error';
-        return;
-    }
-
-    // Validate email format
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-        statusDiv.textContent = '❌ Please enter a valid email address.';
-        statusDiv.className = 'error';
-        return;
-    }
-
-    // Prepare data to send
-    const formData = {
-        name: name,
-        email: email,
-        phone: phone,
-        message: message,
-        timestamp: new Date().toISOString()
-    };
-
-    // Simulate sending (In a real scenario, this would be sent to a server)
-    statusDiv.textContent = '✓ Message sent successfully! We will get back to you soon.';
-    statusDiv.className = 'success';
-
-    // Log the data (for demonstration)
-    console.log('Form Data:', formData);
-
-    // Reset form
-    setTimeout(() => {
-        document.getElementById('contactForm').reset();
-        generateCaptcha();
-        statusDiv.textContent = '';
-    }, 3000);
-});
 
 // Smooth scroll for navigation links (fallback for older browsers)
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
